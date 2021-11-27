@@ -19,7 +19,16 @@
     <!-- <pre>{{activities$ | async | json}}</pre> -->
     <ng-container *ngIf="activities$ | async; let actz">  
       <ng-container *ngFor="let activity of actz">
-        <pre>{{activity | json}}</pre>
+        <!-- <pre>{{activity | json}}</pre> -->
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{activity.name}}</ion-card-title>
+            <ion-card-subtitle>{{activity.type}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            Photos: {{activity.photo_count}}
+          </ion-card-content>
+        </ion-card>
       </ng-container>
     </ng-container>    
     <app-google-map></app-google-map>

@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { GoogleMap } from '@angular/google-maps';
+import { Coords } from 'dto/geolocation.dto';
+import { Observable } from 'rxjs';
 import { GoogleMapsService } from 'src/app/services/google-map.service';
 
 @Component({
@@ -7,10 +9,19 @@ import { GoogleMapsService } from 'src/app/services/google-map.service';
   templateUrl: './google-map.component.html',
   styleUrls: ['./google-map.component.scss'],
 })
-export class GoogleMapComponent implements OnInit {
+export class GoogleMapComponent implements OnInit, AfterViewInit {
   apiLoaded: Observable<boolean>;
-  @ViewChild('map') mapElement;
-  map: google.maps.Map;
+  @ViewChild(GoogleMap) map: GoogleMap;
+  options: google.maps.MapOptions = {
+    center: {
+      lat: 0,
+      lng: 0
+    },
+    zoom: 9,
+    minZoom: 2,
+    maxZoom: 15,
+    // styles: darkStyle,
+  };  
 
   constructor(
     private googleMaps: GoogleMapsService,
@@ -19,19 +30,17 @@ export class GoogleMapComponent implements OnInit {
   ngOnInit() {
     this.apiLoaded = this.googleMaps.buildMap();
     console.log('test');
-    // const additionalOptions = {}; 
-    // const loader = new Loader({
-    //   apiKey: "AIzaSyDTzmqmTc7vy3WsjFiwcbNGl81hXxpZZyU",
-    //   version: "weekly",
-    //   ...additionalOptions,
-    // });
-    
-    // loader.load().then(() => {
-    //   this.map = new google.maps.Map(this.mapElement, {
-    //     center: { lat: -34.397, lng: 150.644 },
-    //     zoom: 8,
-    //   });
-    // });
+    navigator.geolocation.getCurrentPosition((pos: GeolocationPosition) => this.setCenter(pos.coords));
   }
+
+  ngAfterViewInit(): void {
+    // this.map.center = this.center;
+  }
+
+  setCenter(coords: GeolocationCoordinates) {
+    console.log('center coords: ', coords);
+    this.options.center.lat = coords.latitude;
+    this.options.center.lng = coords.longitude;
+  }  
 
 }
