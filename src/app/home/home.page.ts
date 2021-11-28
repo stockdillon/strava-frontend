@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivitiesService } from './../services/activities.service';
 import { Observable } from 'rxjs';
-import { ActivitiesResponse, Activity } from '../dto/activities.dto';
+import { Activity } from 'dto/';
 import { share } from 'rxjs/operators';
 
 @Component({

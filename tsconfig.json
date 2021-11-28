@@ -15,7 +15,8 @@
     "lib": ["es2018", "dom"],
     "paths": {
       "dto/*": [
-        "src/app/dto/*"
+        "src/app/dto/*",
+        "src/app/dto/index.ts"
       ]
     },    
     "types": ["googlemaps"]

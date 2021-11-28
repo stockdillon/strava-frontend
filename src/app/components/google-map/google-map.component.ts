@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
-import { Coords } from 'dto/geolocation.dto';
+import { Coords } from 'dto/';
 import { Observable } from 'rxjs';
 import { GoogleMapsService } from 'src/app/services/google-map.service';
 
@@ -11,7 +11,16 @@ import { GoogleMapsService } from 'src/app/services/google-map.service';
 })
 export class GoogleMapComponent implements OnInit, AfterViewInit {
   apiLoaded: Observable<boolean>;
-  @ViewChild(GoogleMap) map: GoogleMap;
+  // @ViewChild(GoogleMap) map: GoogleMap;
+  map: GoogleMap;
+  @ViewChild(GoogleMap, { static: false }) set Map(map: GoogleMap) {
+    if (!map) { 
+      return;
+    } else if (!this.map) {
+      this.map = map;
+      // this.initMapSearch(map);
+    }
+  };  
   options: google.maps.MapOptions = {
     center: {
       lat: 0,
