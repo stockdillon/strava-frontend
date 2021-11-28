@@ -15,7 +15,7 @@ export class ActivitiesService {
 
   get(): Observable<Activity[]> {
     return this.http.get<ActivitiesResponse>(`/api/activities`).pipe(
-      map((response: ActivitiesResponse) => response.activities)
+      map((response: ActivitiesResponse) => response.activities ?? [])
     );
   }
 }

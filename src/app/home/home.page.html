@@ -26,7 +26,12 @@
             <ion-card-subtitle>{{activity.type}}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            Photos: {{activity.photo_count}}
+            Photos: {{activity.total_photo_count}}
+            <ion-item *ngIf="activity.photo_url">
+              <ion-avatar slot="start">
+                <img [src]="activity.photo_url" />
+              </ion-avatar>
+            </ion-item>
           </ion-card-content>
         </ion-card>
       </ng-container>

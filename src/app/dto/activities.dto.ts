@@ -33,6 +33,7 @@ export interface Activity {
     comment_count:                 number;
     athlete_count:                 number;
     photo_count:                   number;
+    photo_url:                     string;
     map:                           Map;
     trainer:                       boolean;
     commute:                       boolean;
